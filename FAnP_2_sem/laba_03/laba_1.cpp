@@ -44,7 +44,6 @@ void task1() {
 		одинаковых слов.Определить номер слова, в котором больше всего цифр.
 	*/
 	char buff[1024];
-
 	fstream f,f2;
 	string path1 = "FILE1.txt", path2 = "FILE2.txt", str, * arr;
 	f.open(path1, fstream::in | fstream::out);
