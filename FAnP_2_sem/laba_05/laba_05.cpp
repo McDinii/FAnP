@@ -9,7 +9,7 @@
 #include <sstream>
 #include <algorithm>
 # define str_len 25
-# define size 3  
+int size = 3;
 using namespace std;
 void enter_new();
 void del();
@@ -24,7 +24,7 @@ typedef struct Exam
 	char lastName[str_len];
 
 } ex;
-struct Exam list_of_student[size];
+struct Exam list_of_student[3];
 struct Exam bad;
 FILE* f; FILE* f1; FILE* f2; errno_t err;
 int current_size = 0; int choice;
@@ -37,7 +37,7 @@ int main()
 	cout << "2-для ввода новой записи" << endl;
 	cout << "3-для поиска по структуре" << endl;
 	cout << "4-для вывода записи(ей)" << endl;
-	cout << "6-для допа№2< endl;
+	cout << "6-для допа№3" << endl;
 	cout << "5-для выхода" << endl;
 	cin >> choice;
 	do
@@ -46,34 +46,35 @@ int main()
 		{
 		case 1:  del();	break;
 		case 2:  enter_new();  break;
-		case 3:  
+		case 3:
 			cout << "Введите фамилию" << endl;
 			cin >> name;
 			find(name);  break;
 		case 4:  out();	break;
-		case 6:  dop2;	break;
+		case 6:  dop2(); break;
 		}
 	} while (choice != 5);
 }
 void enter_new()
 {
 	cout << "Ввод информации" << endl;
-	ex buf = { ' ', ' ', ' ', ' ',' '};
+	ex buf = { ' ', ' ', ' ', ' ',' ' };
 	if (!fopen_s(&f, "main.bin", "ab")) {
-			if (current_size < size)
-			{	cout << "Строка номер ";
-				cout << current_size + 1;
-				cout << endl << "Фамилия " << endl;
-				cin >> buf.lastName;
-				cout << "День экзамена " << endl;
-				cin >> buf.day;
-				cout << "Месяц экзамена  " << endl;
-				cin >> buf.month;
-				cout << "Название экзамена  " << endl;
-				cin >> buf.examName;
-				fwrite(&buf, sizeof(buf), 1, f);
-				current_size++;
-			}
+		if (current_size < 3)
+		{
+			cout << "Строка номер ";
+			cout << current_size + 1;
+			cout << endl << "Фамилия " << endl;
+			cin >> buf.lastName;
+			cout << "День экзамена " << endl;
+			cin >> buf.day;
+			cout << "Месяц экзамена  " << endl;
+			cin >> buf.month;
+			cout << "Название экзамена  " << endl;
+			cin >> buf.examName;
+			fwrite(&buf, sizeof(buf), 1, f);
+			current_size++;
+		}
 
 		else {
 			cout << "Введено максимальное кол-во строк" << endl;
@@ -86,7 +87,7 @@ void enter_new()
 		cout << "Ошибка открытия файла";
 		return;
 	}
-	
+
 }
 void del()
 {
@@ -171,7 +172,7 @@ void find(char Name[])
 {
 	bool non = false;
 	ex buf;
-	if (!fopen_s(&f, "main.bin", "rb")) 
+	if (!fopen_s(&f, "main.bin", "rb"))
 	{
 		cout << "\nФамилия     |   Экзамен     |   День     |  Месяц\n";
 		fread(&buf, sizeof(buf), 1, f);
@@ -187,7 +188,7 @@ void find(char Name[])
 		if (non == false) {
 			cout << "Информации не найдено" << endl;
 		}
-	
+
 		fclose(f);
 	}
 	else
@@ -197,7 +198,7 @@ void find(char Name[])
 	}
 	cout << endl << "Что дальше?" << endl;
 	cin >> choice;
-	
+
 }
 void out()
 {
@@ -225,115 +226,8 @@ void out()
 	cout << endl << "Что дальше?" << endl;
 	cin >> choice;
 
-	
-}
-struct Camp {
-	string CampName;
-	string CampPlace;
-	string CampType;
-	int voucher;
-};
-
-bool comp1(Camp lhs, Camp rhs)
-{
-	return lhs.CampName < rhs.CampName;
-}
-
-bool comp(Camp lhs, Camp rhs)
-{
-	return lhs.CampType < rhs.CampType;
-}
-
-void showInfo(Camp* lagger, int SIZE) {
-	sort(lagger, lagger + SIZE, comp);
-	int index1 = 0;
-	int index2 = 0;
-
-	for (int i = 0; i < SIZE; i++)
-	{
-		if (lagger[i].CampType == lagger[i + 1].CampType)
-		{
-			index1 = i;
-			break;
-		}
-	}
-
-	for (int i = SIZE; i > 0; i--)
-	{
-		if (lagger[i].CampType == lagger[i - 1].CampType)
-		{
-			index2 = i;
-			break;
-		}
-	}
-
-	sort(lagger + index1, lagger + index2 + 1, comp1);
-
-
-	for (int i = 0; i < SIZE; ++i) {
-		cout << "Название лагеря: " << lagger[i].CampName << "\t";
-		cout << "Место лагеря: " << lagger[i].CampPlace << "\t";
-		cout << "Профиль лечения: " << lagger[i].CampType << "\t\t";
-		cout << "Количество путевок: " << lagger[i].voucher << "\t" << endl;
-		cout << "////////////////////////////////////////////////////////////////////////////////////////////////////////////" << endl;
-	}
 
 }
-
-void ifileCamp(Camp* lagger, int SIZE)
-{
-
-	ifstream fin("lagggerInfo.txt");
-
-	if (!fin.is_open()) {
-		cout << "Не удаётся открыть файл для чтения " << endl;
-		exit(EXIT_FAILURE);
-	}
-
-	vector<string> fileinfo;
-	string line, word;
-	stringstream x;
-	for (int i = 0; i < SIZE; ++i) {
-		fin >> lagger[i].voucher;
-		getline(fin, line);
-		x << line;
-		while (x >> word)
-		{
-			fileinfo.push_back(word);
-		}
-		for (int k = 0; k < fileinfo.size(); k++)
-		{
-			if (k == 0) { lagger[i].CampName = fileinfo[k]; }
-			if (k == 1) { lagger[i].CampPlace = fileinfo[k]; }
-			if (k == 2) { lagger[i].CampType = fileinfo[k]; }
-		}
-		x.clear();
-		line.clear();
-		word.clear();
-		fileinfo.clear();
-	}
-	cout << "\nИнформация считана из файла lagggerInfo.txt\n\n";
-}
-
-void dop3()
-{
-
-	setlocale(LC_CTYPE, "ru");
-	const int SIZE = 5;
-	Camp lager[SIZE];
-	short choose;
-	do {
-		cout << "Выберите, что сделать:\n1 — вывести информацию из файла;\n2 — вывести в консоль информацию о путёвках;\n3 — выход\n";
-		cin >> choose;
-		switch (choose)
-		{
-		case 1: ifileCamp(lager, SIZE); break;
-		case 2: showInfo(lager, SIZE); break;
-		case 3: exit(0); break;
-		}
-	} while (choose != 3);
-}
-
 
 //Доп 2  
 /*Описать структуру с именем TRAIN, содержащую поля: названия пункта назначения,
@@ -360,7 +254,7 @@ void displayTrain(Train* trains, int SIZE) {
 	cout << "Расписание всех поездов" << endl;
 	for (int i = 0; i < SIZE; ++i)
 	{
-
+		
 		cout << "Номер поезда: " << trains[i].NumTrain << "\t";
 		cout << "Место прибытия: " << trains[i].Place << "\t\t";
 		cout << " Время прибытия на вокзал: " << trains[i].time << "\t";
@@ -413,7 +307,7 @@ void displayTrainMode(Train* trains, int SIZE, string user_time)
 	{
 		if (all_user_time < time_train[i])
 		{
-
+			
 			cout << "Номер поезда: " << trains[i].NumTrain << "\t";
 			cout << "Место прибытия: " << trains[i].Place << "\t\t";
 			cout << "Время прибытия на вокзал: " << trains[i].time << "\t";
@@ -487,6 +381,10 @@ void dop2()
 
 
 }
+
+
+
+
 
 
 
