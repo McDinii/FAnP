@@ -33,10 +33,11 @@ void del(Stack*& myStk) {
 			for (int k = j + 1; k < len; k++) {
 				if (arr[k] == arr[j]) {
 					cout << "Повторился: " << arr[k] << endl;
+					delete del;
 					
 				}
 			}
-			del = del->next;
+			myStk= myStk->next;
 			j++;
 	}
 	delete del;
