@@ -24,7 +24,7 @@ Tree* Root = NULL; 	//указатель на корень
 
 void main()
 {
-	setlocale(0, "Russian");
+	setlocale(LC_ALL, "Russian");
 	int key, choice, n;
 	Tree* rc; char s[5], letter;
 	for (;;)
