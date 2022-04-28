@@ -2,9 +2,8 @@
 #include <iostream>
 int HashFunction(int key, int size, int p)    //хеш-функция
 {
-	return key % size;
+	return (3*key + 2 )% size ;
 }
-
 //-------------------------------
 int Next_hash(int hash, int size, int p)
 {

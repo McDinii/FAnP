@@ -1,6 +1,5 @@
-//Изменить функцию вычисления хеш для решения коллизии на функцию, которая строится на основе формулы :
-//h(key, i) = (h1(key) + i?h2(key))mod hashTableSize,
-//где  h1(key) = key-mod hashTableSize, h2(key) = 1 + (key-mod hashTableSize).
+//Изменить функцию вычисления хеш для решения коллизии на функцию, которая строится на основе формулы : h(key, i) = (h1(key) + i?h2(key))?mod hashTableSize, 
+//где  h1(key) = key?mod hashTableSize, h2(key) = 1 + (key?mod hashTableSize). .
 #include "Header.h"
 #include <iostream>
 using namespace std;
