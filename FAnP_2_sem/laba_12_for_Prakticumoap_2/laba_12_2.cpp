@@ -1,7 +1,10 @@
 #include <iostream>
 #include <time.h>
+
+
 using namespace std;
 void var15();
+void var2();
 void  bubble(int Arr[], int size);
 int* sortHoar(int A[], int sm, int em);
 int getHoarBorder(int A[], int sm, int em);
@@ -9,10 +12,11 @@ int main() {
     setlocale(LC_ALL, "Rus");
 	for (;;)
 	{
+		
         int  choice;
 		cout << "Select:" << endl;
 		cout << "1 - Variant 15 " << endl;
-		cout << "2 - Вывод очереди" << endl;
+		cout << "2 - dop1(var 2)" << endl;
 		cout << "3 -Размер очереди " << endl;
 		cout << "4 -Удаление n элементов" << endl;
 		cout << "5 - Удаление элементов очереди " << endl;
@@ -26,7 +30,20 @@ int main() {
             var15();
 			break;
 		case 2:
+		{
+			char a[20]="privet"; char b[20] = "";
+			int j = 1;
+			for (int i = 0; i < strlen(a); i++) {
+				if (i < strlen(a) / 2) {
+					b[i] = a[strlen(a) / 2 - i - 1];
 
+				}
+				else {
+					b[i] = a[strlen(a) - j];
+					j++;
+				}
+			}
+			cout << b<< endl; }
 			break;
 		case 3:
 			break;
@@ -42,29 +59,29 @@ int main() {
     return 0;
 }
 void var15() {
-    const int size = 5;
-    int A[size], B[size], C[2 * size];
-    srand(time(NULL));
-    // заполнение матрицы ГСЧ
-    for (int i = 0; i < size; i++) {
-        A[i] = 1 + rand() % size;
-        cout << A[i] << " ";
-    }
-    cout << endl;
-    for (int i = 0; i < size; i++) {
-        B[i] = 1 + rand() % size;
-        cout << B[i] << " ";
-    }
+	const int SIZE = 5;
+	int A[SIZE], B[SIZE], C[2 * SIZE];
+	srand(time(NULL));
+	// заполнение матрицы ГСЧ
+	for (int i = 0; i < SIZE; i++) {
+		A[i] = 1 + rand() % SIZE;
+		cout << A[i] << " ";
+	}
+	cout << endl;
+	for (int i = 0; i < SIZE; i++) {
+		B[i] = 1 + rand() % SIZE;
+		cout << B[i] << " ";
+	}
     //finding max B
     int maxB = -10e9;
-    for (int i = 0; i < size; i++) {
+    for (int i = 0; i < SIZE; i++) {
         if (B[i] > maxB)
             maxB = B[i];
         
     }
     cout << "MAX from B = " << maxB << endl; 
     int check = 0;
-    for (int i = 0; i < size; i++) {
+    for (int i = 0; i < SIZE; i++) {
         if (A[i] < maxB) {
             C[check] = A[i];
             check++;
@@ -81,8 +98,8 @@ void var15() {
 	case 2: 
 		int sa = 0;
 		int ea = check - 1;
-		getHoarBorder(C, sa, ea);
-		sortHoar(C, sa, ea);
+		getHoarBorder(C, sa, check );
+		sortHoar(C, sa, check);
 		break;
 	}
         system("pause");
@@ -91,6 +108,7 @@ void var15() {
     }
     system("pause");
 }
+
 void bubble(int Arr[], int size) {
     int i, j, t;
     for (i = size-1; i>=0; i--)
@@ -130,3 +148,4 @@ int* sortHoar(int A[], int sm, int em)
 	}
 	return A;
 };
+

@@ -51,6 +51,7 @@ int main()
 		{AAA* a = new AAA;
 		cout << "введите ключ" << endl; cin >> k;
 		a->x = k;
+		
 		h2.insert(a);
 		h1.insert(a);
 		}
@@ -65,7 +66,6 @@ int main()
 			h1.extractX(h1,k );
 			break;
 		case 6:
-			
 			h1.scan(0);
 			break;
 		default:  cout << endl << "Введена неверная команда!" << endl;

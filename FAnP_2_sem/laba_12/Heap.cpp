@@ -74,6 +74,7 @@ namespace heap
 		int check = 0;
 		if (!isEmpty())
 		{	
+			
 			rc = storage[0];
 			for (int i = 0; i < size; i++) {
 				if (isLess(storage[i], min)) {
@@ -113,6 +114,7 @@ namespace heap
 	void Heap::unionHeap(void* x)
 	{
 		int i;
+		
 		for (i = 0; i < size - 1; i++)
 		{
 			storage[i] = storage[i + 1];
