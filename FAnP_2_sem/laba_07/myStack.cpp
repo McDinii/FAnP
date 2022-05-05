@@ -37,7 +37,7 @@ void del(Stack*& myStk) {
 					
 				}
 			}
-			myStk= myStk->next;
+			myStk = myStk->next;
 			j++;
 	}
 	delete del;
