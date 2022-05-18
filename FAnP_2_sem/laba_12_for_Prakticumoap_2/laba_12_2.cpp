@@ -1,13 +1,12 @@
 #include <iostream>
 #include <time.h>
-
-
 using namespace std;
 void var15();
-void var2();
+void dop1();
 void  bubble(int Arr[], int size);
 int* sortHoar(int A[], int sm, int em);
 int getHoarBorder(int A[], int sm, int em);
+void printArr(int Arr[], int size);
 int main() {
     setlocale(LC_ALL, "Rus");
 	for (;;)
@@ -30,20 +29,7 @@ int main() {
             var15();
 			break;
 		case 2:
-		{
-			char a[20]="privet"; char b[20] = "";
-			int j = 1;
-			for (int i = 0; i < strlen(a); i++) {
-				if (i < strlen(a) / 2) {
-					b[i] = a[strlen(a) / 2 - i - 1];
-
-				}
-				else {
-					b[i] = a[strlen(a) - j];
-					j++;
-				}
-			}
-			cout << b<< endl; }
+			dop1();
 			break;
 		case 3:
 			break;
@@ -58,6 +44,13 @@ int main() {
     
     return 0;
 }
+void printArr(int Arr[], int size) {
+	for (int i = 0; i < size; i++) {
+		cout << Arr[i] << " ";
+	}
+	cout << endl;
+}
+
 void var15() {
 	const int SIZE = 5;
 	int A[SIZE], B[SIZE], C[2 * SIZE];
@@ -102,14 +95,14 @@ void var15() {
 		sortHoar(C, sa, check);
 		break;
 	}
-        system("pause");
+     
     for (int i = 0; i < check; i++) {
         cout << C[i] << " ";
     }
     system("pause");
 }
 
-void bubble(int Arr[], int size) {
+void bubble(int Arr[], int size ) {
     int i, j, t;
     for (i = size-1; i>=0; i--)
         for (j = i-1; j >=0; j--)
@@ -127,8 +120,8 @@ int getHoarBorder(int A[], int sm, int em)
 	int buf;
 	while (i < j)
 	{
-		while (A[--j] < brd);
-		while (A[++i] > brd);
+		while (A[--j] > brd);
+		while (A[++i] < brd);
 		if (i < j)
 		{
 			buf = A[j];
@@ -148,4 +141,25 @@ int* sortHoar(int A[], int sm, int em)
 	}
 	return A;
 };
+void dop1() {
+	const int SIZE = 5;
+	int A[SIZE], B[SIZE], C[2 * SIZE];
+	srand(time(NULL));
+	// заполнение матрицы ГСЧ
+	for (int i = 0; i < SIZE; i++) {
+		A[i] = 1 + rand() % SIZE;
+		cout << A[i] << " ";
+	}
+	cout << endl;
+	for (int i = 0,k = 0; i < SIZE; i++) {
+		if (i % 2 == 0) {
+			if (A[i + 1] % 2 == 1) {
+				B[k] = A[i];
+				k++;
+			}
+		}
+		printArr(A, SIZE);
+		printArr(B, SIZE);
 
+	cout << endl;
+}

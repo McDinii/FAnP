@@ -23,6 +23,7 @@ int main()
 	int k, choice;
 	heap::Heap h1 = heap::create(30, cmpAAA);
 	heap::Heap h2 = heap::create(30, cmpAAA);
+	heap::Heap h3 = heap::create(30, cmpAAA);
 	for (;;)
 	{
 		cout << "1 - вывод 1 кучи на экран" << endl;
@@ -38,22 +39,22 @@ int main()
 		switch (choice)
 		{
 		case 0:  exit(0);
-		case 1:  h1.scan(0);
-		case 11: h2.scan(0);
-			break;
+		case 1:  h1.scan(0); break;
+		
 		case 2: {	AAA* a = new AAA;
 			cout << "введите ключ" << endl; 	cin >> k;
 			a->x = k;
 			h1.insert(a);
 		}
 			  break;
+		case 11: h2.scan(0);
+			break;
 		case 22:
 		{AAA* a = new AAA;
-		cout << "введите ключ" << endl; cin >> k;
+		cout << "введите ключ" << endl; 	cin >> k;
 		a->x = k;
-		
-		h2.insert(a);
 		h1.insert(a);
+		h2.insert(a);
 		}
 		case 3:   h1.extractMax();
 			break;
